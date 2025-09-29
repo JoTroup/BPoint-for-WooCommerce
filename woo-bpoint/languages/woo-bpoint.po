@@ -1,0 +1,376 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2024-09-03 15:20+0700\n"
+"PO-Revision-Date: 2024-09-03 15:20+0700\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: includes/class-wc-bpoint-payment-gateway.php:25
+msgid "BPOINT"
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:26
+msgid ""
+"The Commonwealth Bank's BPOINT solution allows businesses to easily and "
+"securely accept payments online."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:28
+#: includes/class-wc-bpoint-payment-gateway.php:85
+msgid "Credit Card (Secured by Commonwealth Bank)"
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:76
+msgid "Enable / Disable"
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:77
+msgid "Enable BPOINT payment gateway"
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:82
+msgid "Title"
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:84
+msgid "Payment title the customer will see during the checkout process."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:88
+msgid "Description"
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:90
+msgid "Payment description the customer will see during the checkout process."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:92
+msgid ""
+"Pay securely using your card. Our payments are secured by Commonwealth Bank."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:97
+msgid "Base API URL"
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:99
+msgid "URL for the BPOINT API."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:103
+msgid "Merchant Number"
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:105
+msgid "Your BPOINT merchant number as provided by the bank."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:108
+msgid "API Username"
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:110
+msgid "API username created within BPOINT."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:113
+msgid "API Password"
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:115
+msgid "API password received from BPOINT."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:118
+msgid "Payment Action"
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:120
+msgid "Purchase"
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:120
+msgid "Pre-Auth/Capture"
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:121
+msgid ""
+"Choose between Purchase or Pre-Auth/Capture. Purchase transactions charge "
+"the card immediately. Pre-auths check if the card has available funds and "
+"places a hold on the card for the nominated amount. Captures complete a pre-"
+"auth, charging the card."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:125
+msgid "Test Mode"
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:128
+msgid ""
+"If test mode is enabled, all transactions will be processed in test mode. "
+"You will not receive funds."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:132
+msgid "Minimum Amount"
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:134
+msgid ""
+"This is the lowest amount of money that the order total must reach to use "
+"this payment gateway."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:155
+msgid "Payment has already completed."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:157
+msgid "Pre-Authorization should be completed to perform this action."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:181
+#, php-format
+msgid "BPOINT capture of %s approved."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:184
+#: includes/class-wc-bpoint-payment-gateway.php:195
+#: includes/class-wc-bpoint-payment-gateway.php:246
+#: includes/class-wc-bpoint-payment-gateway.php:309
+#: includes/class-wc-bpoint-payment-gateway.php:318
+#: includes/class-wc-bpoint-payment-gateway.php:325
+#: includes/class-wc-bpoint-payment-gateway.php:414
+#: includes/class-wc-bpoint-payment-gateway.php:423
+#: includes/class-wc-bpoint-payment-gateway.php:439
+#: includes/class-wc-bpoint-payment-gateway.php:448
+#, php-format
+msgid "Receipt Number: %s"
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:190
+#, php-format
+msgid "BPOINT capture of %s declined."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:193
+#: includes/class-wc-bpoint-payment-gateway.php:316
+#: includes/class-wc-bpoint-payment-gateway.php:323
+#: includes/class-wc-bpoint-payment-gateway.php:438
+#: includes/class-wc-bpoint-payment-gateway.php:447
+#: includes/class-wc-bpoint-payment-gateway.php:455
+#, php-format
+msgid "Decline reason: %s."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:200
+msgid "Error processing your request."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:204
+msgid "This order is not processed via BPOINT."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:243
+#, php-format
+msgid "BPOINT captured by bulk edit:<br/>BPOINT capture of %s approved."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:266
+#: includes/class-wc-bpoint-payment-gateway.php:267
+#, php-format
+msgid "Refund reason: %s."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:273
+msgid "Capture should be completed to perform this action."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:277
+msgid "Payment should be completed to perform this action."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:282
+msgid "Invalid refund amount."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:305
+#, php-format
+msgid "BPOINT refund of %s approved."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:314
+#: includes/class-wc-bpoint-payment-gateway.php:321
+#, php-format
+msgid "BPOINT refund of %s declined."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:330
+#: includes/class-wc-bpoint-payment-gateway.php:377
+#: includes/class-wc-bpoint-payment-gateway.php:386
+#: includes/class-wc-bpoint-payment-gateway.php:402
+#: includes/class-wc-bpoint-payment-gateway.php:461 wc-bpoint.php:294
+msgid "Error processing your request. Please contact the store administrator."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:364
+msgid "Awaiting cheque payment."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:374
+#: includes/class-wc-bpoint-payment-gateway.php:383
+msgid "BPOINT create authorization key fail."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:375
+#: includes/class-wc-bpoint-payment-gateway.php:384
+#, php-format
+msgid "Reason fail: %s."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:411
+#, php-format
+msgid "BPOINT authorization of %s approved."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:420
+#, php-format
+msgid "BPOINT payment of %s approved."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:435
+#, php-format
+msgid "BPOINT authorization of %s declined."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:444
+#, php-format
+msgid "BPOINT payment of %s declined."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:454
+msgid "Your payment has declined."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:475
+msgid "Month"
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:483
+msgid "Year"
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:493
+msgid "Cardholder name"
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:497
+msgid "Card number"
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:501
+msgid "Expiry date"
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:509
+msgid "CVN"
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:509
+msgid "Card Verification Number"
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:539
+#, php-format
+msgid "Your credit card will be charged for %s"
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:562
+#, php-format
+msgid "Your order total must reach %s to use this payment method."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:597
+msgid "Card number is a required field."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:598
+msgid "Expiry date is a required field."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:599
+msgid "Expiry month is a required field."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:600
+msgid "Expiry year is a required field."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:601
+msgid "CVN is a required field."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:602
+msgid "Cardholder name is a required field."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:603
+msgid "Please enter a valid card number</b>."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:604
+msgid "Invalid CVN (Card Verification Number)."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:605
+msgid "Incorrect expiry date."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:606
+msgid "Result failure."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:607
+msgid "Invalid response."
+msgstr ""
+
+#: includes/class-wc-bpoint-payment-gateway.php:608
+msgid "disabled."
+msgstr ""
+
+#: wc-bpoint.php:114
+msgid ""
+"PHP's curl extension is not installed. The BPOINT plugin is required to "
+"enable php5-curl in your server."
+msgstr ""
+
+#: wc-bpoint.php:129 wc-bpoint.php:149
+msgid "Pending Capture"
+msgstr ""
+
+#: wc-bpoint.php:166 wc-bpoint.php:167 wc-bpoint.php:268
+msgid "Capture via BPOINT"
+msgstr ""
+
+#: wc-bpoint.php:242
+#, php-format
+msgid "%d order have been captured."
+msgstr ""
+
+#: wc-bpoint.php:326
+msgid "View BPOINT Settings"
+msgstr ""
+
+#: wc-bpoint.php:326
+msgid "Settings"
+msgstr ""
