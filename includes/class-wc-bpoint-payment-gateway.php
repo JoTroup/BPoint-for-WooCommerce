@@ -396,7 +396,7 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
                         __('BPOINT create authorization key fail.', 'woo-bpoint') .
                         '<br/>' . sprintf(__('Reason fail: %s.', 'woo-bpoint'), $result->message) . '<br/>');
                     }
-                    wc_add_notice(__('Error processing your request. Please contact the store administrator.', 'woo-bpoint'),
+                    wc_add_notice(__('HELLO Error processing your request. Please contact the store administrator.', 'woo-bpoint'),
                         'error');
                 }
             } catch (thrownError $e) {
