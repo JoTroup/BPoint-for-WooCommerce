@@ -26,6 +26,9 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
         public $send_bpoint_email;
 
 
+        add_action('woocommerce_admin_field_send_bpoint_email_button', array($this, 'render_send_bpoint_email_button_field'));
+
+
         // Constructor for the gateway.
         public function __construct()
         {
