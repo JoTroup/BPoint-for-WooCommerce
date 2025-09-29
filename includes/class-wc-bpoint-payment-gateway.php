@@ -352,6 +352,9 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
                 $order = wc_get_order($order_id);
                 $woocommerce->cart->empty_cart();
                 $result = $this->bpoint->createAuthkey();
+
+                error_log('Auth key result: ' . print_r($result, true));
+
                 if (isset($result->authkey)) {
                     $user_id = $order->get_user_id();
                     if ($user_id == 0) {
@@ -397,6 +400,7 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
                         'error');
                 }
             } catch (thrownError $e) {
+                error_log('Exception during payment processing: ' . $e);
                 wc_add_notice(__('Failed to process order and run into exception:' + $e, 'woo-bpoint'),'error');
             }            
             
