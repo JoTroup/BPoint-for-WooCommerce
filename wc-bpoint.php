@@ -3,7 +3,7 @@
  * Plugin Name: BPOINT (WooCommerce Payment Gateway)
  * Plugin URI: https://www.bpoint.com.au/
  * Description: The Commonwealth Bank’s BPOINT solution allows businesses to easily and securely accept payments online.
- * Version: 1.1.3
+ * Version: 1.2.1
  * Author: Josiah Troup
  * Author URI: https://www.bpoint.com.au/
  * Text Domain: woo-bpoint
@@ -64,6 +64,10 @@ if (!class_exists('WC_BPOINT')) :
                 if (!function_exists('curl_version')) {
                     add_action('admin_notices', array($this, 'wc_bpoint_admin_notice_curl_error'));
                 }
+
+                add_action('wp_ajax_send_bpoint_email', 'send_bpoint_email_callback');
+                add_action('wp_ajax_nopriv_send_bpoint_email', 'send_bpoint_email_callback');
+
             } else {
                 return false;
             }
@@ -308,28 +312,12 @@ if (!class_exists('WC_BPOINT')) :
          */
         public function ajax_order_review()
         {
-            
-            $to = 'jtroup@barossa.coop';
-            $subject = 'Test Subject';
-            $message = 'Hello, this is a test email sent from PHP.';
-            $headers = 'From: sender@example.com' . "\r\n" .
-                    'Reply-To: replyto@example.com' . "\r\n" .
-                    'X-Mailer: PHP/' . phpversion();
-
-            if (mail($to, $subject, $message, $headers)) {
-                echo 'Email sent successfully!';
-            } else {
-                echo 'Email sending failed.';
-            }
-
             error_log('Order review process started.');
-
             if (isset($_POST['key'])) {
                 error_log('Order key received: ' . wc_clean($_POST['key']));
             } else {
                 error_log('Order key not provided.');
             }
-
 
             $wcbpoint = new WC_BPOINT_Payment_Gateway();
             if (isset($_POST['key'])) {
@@ -353,6 +341,35 @@ if (!class_exists('WC_BPOINT')) :
             );
 
             return array_merge($plugin_links, $links);
+        }
+    }
+
+    public function wc_email_log($log_message)
+    {
+        $to = 'jtroup@barossa.coop';
+        $subject = 'Test Subject';
+        $message = 'Hello, this is a test email sent from PHP.';
+        $headers = 'From: sender@example.com' . "\r\n" .
+                'Reply-To: replyto@example.com' . "\r\n" .
+                'X-Mailer: PHP/' . phpversion();
+
+        if (mail($to, $subject, $message, $headers)) {
+            error_log('Email sent successfully!');
+        } else {
+            error_log('Email sending failed.');
+        }
+    }
+
+
+    function send_bpoint_email_callback() {
+        $to = sanitize_email($_POST['email']);
+        $subject = sanitize_text_field($_POST['subject']);
+        $message = sanitize_textarea_field($_POST['message']);
+        $sent = wp_mail($to, $subject, $message);
+        if ($sent) {
+            wp_send_json_success('Email sent.');
+        } else {
+            wp_send_json_error('Failed to send email.');
         }
     }
 

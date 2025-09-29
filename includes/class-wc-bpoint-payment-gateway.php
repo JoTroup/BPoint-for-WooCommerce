@@ -142,7 +142,15 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
                     'desc_tip' => __('This is the lowest amount of money that the order total must reach to use this payment gateway.',
                         'woo-bpoint'),
                     'default' => 0,
-                )
+                ),
+                'send_bpoint_email' => array(
+                    'title' => __('Send BPOINT Email', 'woo-bpoint'),
+                    'type' => 'button',
+                    'desc_tip' => __('Click to test the send_bpoint_email_callback function.', 'woo-bpoint'),
+                    'custom_attributes' => array(
+                        'onclick' => 'send_bpoint_email_callback(); return false;',
+                    ),
+                ),
             );
         }
 
@@ -353,10 +361,9 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
                 $woocommerce->cart->empty_cart();
                 $result = $this->bpoint->createAuthkey();
 
-                error_log('Auth key result: ' . print_r($result, true));
+                error_log('Auth key result: ' . print_r($result, true)); 
 
                 if (isset($result->authkey)) {
-                    error_log('Auth key created: ' . $result->authkey);
                     $user_id = $order->get_user_id();
                     if ($user_id == 0) {
                         $user_id = "";
@@ -373,8 +380,6 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
                     $this->bpoint->setType("Internet");
                     $this->bpoint->setSubType("Single");
                     $this->bpoint->setTestMode($this->test_mode);
-
-                    error_log('Attaching transaction details to auth key: ' . $result->authkey);
                     $txn_details = $this->bpoint->attachTxnDetails($result->authkey);
                     if ($txn_details === true) {
                         $order->add_order_note(__('Awaiting cheque payment.', 'woo-bpoint'));
