@@ -268,11 +268,7 @@
                                 showError(result);
                             }
                         },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            var result = {"messages": "<ul class=\"woocommerce-error\">\n\t\t\t<li>" + bpoint_checkout_language.ajax_fail + "<\/li>\n\t<\/ul>"};
-                            console.error("AJAX error: " + textStatus + " - " + errorThrown);
-                            showError(result);
-                        }
+
                     })
                 }
                 // Prevent the form from submitting

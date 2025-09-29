@@ -308,7 +308,6 @@ if (!class_exists('WC_BPOINT')) :
          */
         public function ajax_order_review()
         {
-
             console.log('AJAX Order Review called');
             $wcbpoint = new WC_BPOINT_Payment_Gateway();
             if (isset($_POST['key'])) {
