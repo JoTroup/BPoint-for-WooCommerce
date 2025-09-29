@@ -192,7 +192,11 @@
                             $("#" + bpoint_checkout_language.id + "-card-expiry").prop("disabled", false);
                             var result = '';
                             try {
+
+                                console.log("Attempting to process payment with existing key: " + key);
+
                                 if (typeof code != 'object') {
+                                    console.log("Response: " + code);
                                     // Get the valid JSON only from the returned string
                                     if (code.indexOf('<!--WC_START-->') >= 0)
                                         code = code.split('<!--WC_START-->')[1]; // Strip off before after WC_START
@@ -201,9 +205,12 @@
                                     // Parse
                                     result = $.parseJSON(code);
                                 } else {
+                                    console.log("Response is valid JSON");
                                     result = code;
                                 }
                                 if (result.result === 'success') {
+
+                                    console.log("Payment details validated, proceeding with payment");
                                     //Ajax process payment by BPOINT
                                     if (bpointExYear.length > 2) {
                                         bpointExYear = bpointExYear.substring(2);
@@ -222,6 +229,7 @@
                                             }        
                                         },
                                         function (code, data) {
+                                            console.log("BPOINT response code: " + code);
                                             if (code === 'success') {
                                                 window.location = redirect_url;
                                             } else {
@@ -236,6 +244,8 @@
                                 } else {
                                     throw  bpoint_checkout_language.invalid_res;
                                 }
+
+                                console.log("Finished processing payment");
                             }
                             catch (err) {
                                 console.error(err.stack);
