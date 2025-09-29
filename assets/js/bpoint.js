@@ -185,6 +185,9 @@
                 }
                 else {
                     var key = $.trim($("#" + bpoint_checkout_language.id + "-key").val());
+
+                    console.log("Using existing key: " + key);
+                    
                     if (!key || key.trim() === '') {
                         console.error("Error: Key is empty or invalid.");
                         var result = {"messages": "<ul class=\"woocommerce-error\">\n\t\t\t<li>" + bpoint_checkout_language.key_missing + "<\/li>\n\t<\/ul>"};
