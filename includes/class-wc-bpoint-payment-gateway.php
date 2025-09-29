@@ -356,6 +356,7 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
                 error_log('Auth key result: ' . print_r($result, true));
 
                 if (isset($result->authkey)) {
+                    error_log('Auth key created: ' . $result->authkey);
                     $user_id = $order->get_user_id();
                     if ($user_id == 0) {
                         $user_id = "";
@@ -372,6 +373,8 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
                     $this->bpoint->setType("Internet");
                     $this->bpoint->setSubType("Single");
                     $this->bpoint->setTestMode($this->test_mode);
+
+                    error_log('Attaching transaction details to auth key: ' . $result->authkey);
                     $txn_details = $this->bpoint->attachTxnDetails($result->authkey);
                     if ($txn_details === true) {
                         $order->add_order_note(__('Awaiting cheque payment.', 'woo-bpoint'));
@@ -391,11 +394,14 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
                             'woo-bpoint'), 'error');
                     }
                 } else {
+                    error_log('Failed to create auth key: ' . print_r($result, true));
                     if (isset($result->message)) {
                         $order->update_status('failed',
                         __('BPOINT create authorization key fail.', 'woo-bpoint') .
                         '<br/>' . sprintf(__('Reason fail: %s.', 'woo-bpoint'), $result->message) . '<br/>');
                     }
+
+                    error_log('Error: ' . (isset($result->message) ? $result->message : 'Unknown error'));
                     wc_add_notice(__('HELLO Error processing your request. Please contact the store administrator.', 'woo-bpoint'),
                         'error');
                 }
