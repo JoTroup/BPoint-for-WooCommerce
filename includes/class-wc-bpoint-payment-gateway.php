@@ -345,54 +345,61 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
          */
         public function process_payment($order_id)
         {
-            global $woocommerce;
-            $order = wc_get_order($order_id);
-            $woocommerce->cart->empty_cart();
-            $result = $this->bpoint->createAuthkey();
-            if (isset($result->authkey)) {
-                $user_id = $order->get_user_id();
-                if ($user_id == 0) {
-                    $user_id = "";
-                }
-                $amount = $this->bpoint->getLowestDenominationAmount($order->get_total(), $order->get_order_currency());
-                $this->bpoint->setAction($this->payment_action);
-                $this->bpoint->setAmount($amount);
-                $this->bpoint->setCurrency($order->get_order_currency());
-                $this->bpoint->setMerchantReference("");
-                $this->bpoint->setCrn1($order_id);
-                $this->bpoint->setCrn2($user_id);
-                $this->bpoint->setCrn3("");
-                $this->bpoint->setBillerCode(null);
-                $this->bpoint->setType("Internet");
-                $this->bpoint->setSubType("Single");
-                $this->bpoint->setTestMode($this->test_mode);
-                $txn_details = $this->bpoint->attachTxnDetails($result->authkey);
-                if ($txn_details === true) {
-                    $order->add_order_note(__('Awaiting cheque payment.', 'woo-bpoint'));
-                    return array(
-                        'result' => 'success',
-                        'redirect' => $this->get_return_url($order),
-                        'auth_key' => $result->authkey,
-                        'redirect_url' => admin_url('admin-ajax.php?action=bpoint_load_process_payment&AuthKey=' . $result->authkey)
-                    );
+
+            console.log('processing payment');
+            try {
+                global $woocommerce;
+                $order = wc_get_order($order_id);
+                $woocommerce->cart->empty_cart();
+                $result = $this->bpoint->createAuthkey();
+                if (isset($result->authkey)) {
+                    $user_id = $order->get_user_id();
+                    if ($user_id == 0) {
+                        $user_id = "";
+                    }
+                    $amount = $this->bpoint->getLowestDenominationAmount($order->get_total(), $order->get_order_currency());
+                    $this->bpoint->setAction($this->payment_action);
+                    $this->bpoint->setAmount($amount);
+                    $this->bpoint->setCurrency($order->get_order_currency());
+                    $this->bpoint->setMerchantReference("");
+                    $this->bpoint->setCrn1($order_id);
+                    $this->bpoint->setCrn2($user_id);
+                    $this->bpoint->setCrn3("");
+                    $this->bpoint->setBillerCode(null);
+                    $this->bpoint->setType("Internet");
+                    $this->bpoint->setSubType("Single");
+                    $this->bpoint->setTestMode($this->test_mode);
+                    $txn_details = $this->bpoint->attachTxnDetails($result->authkey);
+                    if ($txn_details === true) {
+                        $order->add_order_note(__('Awaiting cheque payment.', 'woo-bpoint'));
+                        return array(
+                            'result' => 'success',
+                            'redirect' => $this->get_return_url($order),
+                            'auth_key' => $result->authkey,
+                            'redirect_url' => admin_url('admin-ajax.php?action=bpoint_load_process_payment&AuthKey=' . $result->authkey)
+                        );
+                    } else {
+                        if (isset($txn_details->message)) {
+                            $order->update_status('failed',
+                            __('BPOINT create authorization key fail.', 'woo-bpoint') .
+                            '<br/>' . sprintf(__('Reason fail: %s.', 'woo-bpoint'), $txn_details->message) . '<br/>');
+                        }
+                        wc_add_notice(__('Error processing your request. Please contact the store administrator.',
+                            'woo-bpoint'), 'error');
+                    }
                 } else {
-                    if (isset($txn_details->message)) {
+                    if (isset($result->message)) {
                         $order->update_status('failed',
                         __('BPOINT create authorization key fail.', 'woo-bpoint') .
-                        '<br/>' . sprintf(__('Reason fail: %s.', 'woo-bpoint'), $txn_details->message) . '<br/>');
+                        '<br/>' . sprintf(__('Reason fail: %s.', 'woo-bpoint'), $result->message) . '<br/>');
                     }
-                    wc_add_notice(__('Error processing your request. Please contact the store administrator.',
-                        'woo-bpoint'), 'error');
+                    wc_add_notice(__('Error processing your request. Please contact the store administrator.', 'woo-bpoint'),
+                        'error');
                 }
-            } else {
-                if (isset($result->message)) {
-                    $order->update_status('failed',
-                    __('BPOINT create authorization key fail.', 'woo-bpoint') .
-                    '<br/>' . sprintf(__('Reason fail: %s.', 'woo-bpoint'), $result->message) . '<br/>');
-                }
-                wc_add_notice(__('Error processing your request. Please contact the store administrator.', 'woo-bpoint'),
-                    'error');
-            }
+            } catch (thrownError $e) {
+                wc_add_notice(__('Failed to process order and run into exception:' + $e, 'woo-bpoint'),'error');
+            }            
+            
         }
 
         public function load_process_payment($authkey)
