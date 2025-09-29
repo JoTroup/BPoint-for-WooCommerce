@@ -173,6 +173,7 @@
                                 }
                             }
                             catch (err) {
+                                console.error(err.stack);
                                 showError(result);
                             }
                         }
@@ -237,6 +238,7 @@
                                 }
                             }
                             catch (err) {
+                                console.error(err.stack);
                                 showError(result);
                             }
                         }
@@ -257,6 +259,7 @@
         if (result && result.messages) {
             $form.prepend(result.messages);
         } else {
+
             $form.prepend('<ul class=\"woocommerce-error\">\n\t\t\t<li>Error.<\/li>\n\t<\/ul>\n');
         }
         // Cancel processing
