@@ -312,7 +312,11 @@ if (!class_exists('WC_BPOINT')) :
             if (isset($_POST['key'])) {
                 $order_id = wc_get_order_id_by_order_key(wc_clean($_POST['key']));
             }
+
+            console.log('Order ID: ' . $order_id);
             $result = $wcbpoint->process_payment($order_id);
+
+            console.log('Result: ' . print_r($result, true));
             echo '<!--WC_START-->' . json_encode($result) . '<!--WC_END-->';
             exit;
         }
