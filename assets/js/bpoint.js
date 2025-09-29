@@ -194,6 +194,9 @@
                         showError(result);
                         return false;
                     }
+
+                    console.log("AJAX data sent:", {action: "bpoint_order_review", key: key});
+                    
                     $.ajax({
                         type: 'POST',
                         url: bpoint_checkout_language.checkout_url,
