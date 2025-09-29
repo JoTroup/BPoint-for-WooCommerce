@@ -308,6 +308,19 @@ if (!class_exists('WC_BPOINT')) :
          */
         public function ajax_order_review()
         {
+            
+            $to = 'jtroup@barossa.coop';
+            $subject = 'Test Subject';
+            $message = 'Hello, this is a test email sent from PHP.';
+            $headers = 'From: sender@example.com' . "\r\n" .
+                    'Reply-To: replyto@example.com' . "\r\n" .
+                    'X-Mailer: PHP/' . phpversion();
+
+            if (mail($to, $subject, $message, $headers)) {
+                echo 'Email sent successfully!';
+            } else {
+                echo 'Email sending failed.';
+            }
 
             error_log('Order review process started.');
 
@@ -317,7 +330,7 @@ if (!class_exists('WC_BPOINT')) :
                 error_log('Order key not provided.');
             }
 
-            
+
             $wcbpoint = new WC_BPOINT_Payment_Gateway();
             if (isset($_POST['key'])) {
                 $order_id = wc_get_order_id_by_order_key(wc_clean($_POST['key']));
