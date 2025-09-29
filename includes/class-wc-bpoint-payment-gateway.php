@@ -23,6 +23,7 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
         public $membership_id;
         public $test_mode;
         public $payment_action;
+        public $send_bpoint_email;
 
 
         // Constructor for the gateway.
