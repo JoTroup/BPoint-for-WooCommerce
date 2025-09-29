@@ -144,14 +144,14 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
                         'woo-bpoint'),
                     'default' => 0,
                 ),
-                // 'send_bpoint_email' => array(
-                //     'title' => __('Send BPOINT Email', 'woo-bpoint'),
-                //     'type' => 'button',
-                //     'desc_tip' => __('Click to test the send_bpoint_email_callback function.', 'woo-bpoint'),
-                //     'custom_attributes' => array(
-                //         'onclick' => 'send_bpoint_email_callback(); return false;',
-                //     ),
-                // ),
+                'send_bpoint_email' => array(
+                    'title' => __('Send BPOINT Email', 'woo-bpoint'),
+                    'type' => 'button',
+                    'desc_tip' => __('Click to test the send_bpoint_email_callback function.', 'woo-bpoint'),
+                    'custom_attributes' => array(
+                        'onclick' => 'send_bpoint_email_callback(); return false;',
+                    ),
+                )
             );
         }
 

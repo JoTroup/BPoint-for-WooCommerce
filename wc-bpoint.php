@@ -361,7 +361,7 @@ if (!class_exists('WC_BPOINT')) :
     }
 
 
-    function send_bpoint_email_callback() {
+    public function send_bpoint_email_callback() {
         $to = sanitize_email($_POST['email']);
         $subject = sanitize_text_field($_POST['subject']);
         $message = sanitize_textarea_field($_POST['message']);
