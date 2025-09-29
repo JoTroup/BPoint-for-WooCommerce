@@ -309,7 +309,15 @@ if (!class_exists('WC_BPOINT')) :
         public function ajax_order_review()
         {
 
-            debug_to_console('AJAX Order Review Called');
+            error_log('Order review process started.');
+
+            if (isset($_POST['key'])) {
+                error_log('Order key received: ' . wc_clean($_POST['key']));
+            } else {
+                error_log('Order key not provided.');
+            }
+
+            
             $wcbpoint = new WC_BPOINT_Payment_Gateway();
             if (isset($_POST['key'])) {
                 $order_id = wc_get_order_id_by_order_key(wc_clean($_POST['key']));
