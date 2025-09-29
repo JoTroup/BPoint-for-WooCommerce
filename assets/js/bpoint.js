@@ -187,7 +187,7 @@
                     var key = $.trim($("#" + bpoint_checkout_language.id + "-key").val());
 
                     console.log("Using existing key: " + key);
-                    
+
                     if (!key || key.trim() === '') {
                         console.error("Error: Key is empty or invalid.");
                         var result = {"messages": "<ul class=\"woocommerce-error\">\n\t\t\t<li>" + bpoint_checkout_language.key_missing + "<\/li>\n\t<\/ul>"};
@@ -199,14 +199,14 @@
                         url: bpoint_checkout_language.checkout_url,
                         data: {action: "bpoint_order_review", key: key},
                         success: function (code) {
-                            $("#" + bpoint_checkout_language.id + "-card-holder-name").prop("disabled", false);
+                            $("#" + bpoint_checkout_language.id + "bpoint-card-holder-name").prop("disabled", false);
                             $("#" + bpoint_checkout_language.id + "-card-number").prop("disabled", false);
                             $("#" + bpoint_checkout_language.id + "-card-cvc").prop("disabled", false);
                             $("#" + bpoint_checkout_language.id + "-card-expiry").prop("disabled", false);
                             var result = '';
                             try {
 
-                                console.log("Attempting to process payment with existing key: " + key);
+                                console.log("Attempting to process payment with existing key: " + key + " Response: " + code);
 
                                 if (typeof code != 'object') {
                                     console.log("Response: " + code);
