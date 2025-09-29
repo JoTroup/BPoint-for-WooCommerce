@@ -199,7 +199,10 @@
                         url: bpoint_checkout_language.checkout_url,
                         data: {action: "bpoint_order_review", key: key},
                         success: function (code) {
-                            $("#" + bpoint_checkout_language.id + "bpoint-card-holder-name").prop("disabled", false);
+
+                            console.log("AJAX success response received");
+                            console.log("#" + bpoint_checkout_language.id + "-card-holder-name");
+                            $("#" + bpoint_checkout_language.id + "-card-holder-name").prop("disabled", false);
                             $("#" + bpoint_checkout_language.id + "-card-number").prop("disabled", false);
                             $("#" + bpoint_checkout_language.id + "-card-cvc").prop("disabled", false);
                             $("#" + bpoint_checkout_language.id + "-card-expiry").prop("disabled", false);
