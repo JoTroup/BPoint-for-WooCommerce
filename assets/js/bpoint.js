@@ -272,7 +272,6 @@
                             }
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
-                            console.error("AJAX error: " + textStatus + ' : ' + errorThrown);
                             $("#" + bpoint_checkout_language.id + "-card-holder-name").prop("disabled", false);
                             $("#" + bpoint_checkout_language.id + "-card-number").prop("disabled", false);
                             $("#" + bpoint_checkout_language.id + "-card-cvc").prop("disabled", false);
