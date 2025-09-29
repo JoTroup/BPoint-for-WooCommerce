@@ -133,8 +133,12 @@
                                         code = code.split('<!--WC_START-->')[1]; // Strip off before after WC_START
                                     if (code.indexOf('<!--WC_END-->') >= 0)
                                         code = code.split('<!--WC_END-->')[0]; // Strip off anything after WC_END
-                                    // Parse
-                                    result = $.parseJSON(code);
+                                    // Check if the extracted code is valid JSON
+                                    if (code && code.trim() !== 'null') {
+                                        result = $.parseJSON(code);
+                                    } else {
+                                        throw new Error("Invalid JSON response: " + code);
+                                    }
                                 } else {
                                     result = code;
                                 }
@@ -251,6 +255,15 @@
                                 console.error(err.stack);
                                 showError(result);
                             }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error("AJAX error: " + textStatus + ' : ' + errorThrown);
+                            $("#" + bpoint_checkout_language.id + "-card-holder-name").prop("disabled", false);
+                            $("#" + bpoint_checkout_language.id + "-card-number").prop("disabled", false);
+                            $("#" + bpoint_checkout_language.id + "-card-cvc").prop("disabled", false);
+                            $("#" + bpoint_checkout_language.id + "-card-expiry").prop("disabled", false);
+                            var result = {"messages": "<ul class=\"woocommerce-error\">\n\t\t\t<li>" + bpoint_checkout_language.ajax_fail + "<\/li>\n\t<\/ul>"};
+                            showError(result);
                         }
                     })
                 }
