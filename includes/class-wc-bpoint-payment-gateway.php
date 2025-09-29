@@ -146,13 +146,30 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
                 ),
                 'send_bpoint_email' => array(
                     'title' => __('Send BPOINT Email', 'woo-bpoint'),
-                    'type' => 'button',
+                    'type' => 'send_bpoint_email_button', // custom type
                     'desc_tip' => __('Click to test the send_bpoint_email_callback function.', 'woo-bpoint'),
-                    'custom_attributes' => array(
-                        'onclick' => 'send_bpoint_email_callback(); return false;',
-                    ),
                 )
             );
+        }
+
+        public function render_send_bpoint_email_button_field($field) {
+            ?>
+            <tr valign="top">
+                <th scope="row" class="titledesc"><?php echo esc_html($field['title']); ?></th>
+                <td class="forminp">
+                    <button type="button" class="button" id="send_bpoint_email_btn"><?php echo esc_html($field['title']); ?></button>
+                    <span class="description"><?php echo esc_html($field['desc_tip']); ?></span>
+                </td>
+            </tr>
+            <script>
+                jQuery(document).ready(function($){
+                    $('#send_bpoint_email_btn').on('click', function(){
+                        // AJAX call here
+                        send_bpoint_email_callback();
+                    });
+                });
+            </script>
+            <?php
         }
 
         /**
