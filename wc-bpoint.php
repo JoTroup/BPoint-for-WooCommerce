@@ -342,36 +342,38 @@ if (!class_exists('WC_BPOINT')) :
 
             return array_merge($plugin_links, $links);
         }
-    }
 
-    public function wc_email_log($log_message)
-    {
-        $to = 'jtroup@barossa.coop';
-        $subject = 'Test Subject';
-        $message = 'Hello, this is a test email sent from PHP.';
-        $headers = 'From: sender@example.com' . "\r\n" .
-                'Reply-To: replyto@example.com' . "\r\n" .
-                'X-Mailer: PHP/' . phpversion();
+        public function wc_email_log($log_message)
+        {
+            $to = 'jtroup@barossa.coop';
+            $subject = 'Test Subject';
+            $message = 'Hello, this is a test email sent from PHP.';
+            $headers = 'From: sender@example.com' . "\r\n" .
+                    'Reply-To: replyto@example.com' . "\r\n" .
+                    'X-Mailer: PHP/' . phpversion();
 
-        if (mail($to, $subject, $message, $headers)) {
-            error_log('Email sent successfully!');
-        } else {
-            error_log('Email sending failed.');
+            if (mail($to, $subject, $message, $headers)) {
+                error_log('Email sent successfully!');
+            } else {
+                error_log('Email sending failed.');
+            }
+        }
+
+
+        public function send_bpoint_email_callback() {
+            $to = sanitize_email($_POST['email']);
+            $subject = sanitize_text_field($_POST['subject']);
+            $message = sanitize_textarea_field($_POST['message']);
+            $sent = wp_mail($to, $subject, $message);
+            if ($sent) {
+                wp_send_json_success('Email sent.');
+            } else {
+                wp_send_json_error('Failed to send email.');
+            }
         }
     }
 
-
-    public function send_bpoint_email_callback() {
-        $to = sanitize_email($_POST['email']);
-        $subject = sanitize_text_field($_POST['subject']);
-        $message = sanitize_textarea_field($_POST['message']);
-        $sent = wp_mail($to, $subject, $message);
-        if ($sent) {
-            wp_send_json_success('Email sent.');
-        } else {
-            wp_send_json_error('Failed to send email.');
-        }
-    }
+    
 
     $WC_BPOINT = new WC_BPOINT(__FILE__);
 
