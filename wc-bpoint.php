@@ -343,21 +343,7 @@ if (!class_exists('WC_BPOINT')) :
             return array_merge($plugin_links, $links);
         }
 
-        public function wc_email_log($log_message)
-        {
-            $to = 'jtroup@barossa.coop';
-            $subject = $_POST['subject'];
-            $message = $_POST['message'];
-            $headers = 'From: no-reply@barossa.coop' . "\r\n" .
-                    'Reply-To: no-reply@barossa.coop' . "\r\n" .
-                    'X-Mailer: PHP/' . phpversion();
 
-            if (mail($to, $subject, $message, $headers)) {
-                error_log('Email sent successfully!');
-            } else {
-                error_log('Email sending failed.');
-            }
-        }
     }
 
     

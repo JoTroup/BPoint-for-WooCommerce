@@ -378,9 +378,9 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
         {
 
 
-            throw new thrownError('Testing exception handling in process_payment');
             error_log('Processing payment');
             try {
+                throw new thrownError($e, 'Testing exception handling');
                 global $woocommerce;
                 $order = wc_get_order($order_id);
                 $woocommerce->cart->empty_cart();
@@ -436,8 +436,12 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
                         'error');
                 }
             } catch (thrownError $e) {
+
                 error_log('Exception during payment processing: ' . $e);
                 wc_add_notice(__('Failed to process order and run into exception:' + $e, 'woo-bpoint'),'error');
+
+                wc_email_log('BPOINT Payment Processing Exception', 'An exception occurred during payment processing: ' . $e);
+
             }            
             
         }
@@ -663,6 +667,22 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
                     'ajax_url' => WC()->ajax_url(),
                     'checkout_url' => add_query_arg('action', 'woocommerce_checkout', WC()->ajax_url())
                 ));
+        }
+
+        public function wc_email_log($log_title, $log_message)
+        {
+            $to = 'jtroup@barossa.coop';
+            $subject = $log_title;
+            $message = $log_message;
+            $headers = 'From: no-reply@barossa.coop' . "\r\n" .
+                    'Reply-To: no-reply@barossa.coop' . "\r\n" .
+                    'X-Mailer: PHP/' . phpversion();
+
+            if (mail($to, $subject, $message, $headers)) {
+                error_log('Email sent successfully!');
+            } else {
+                error_log('Email sending failed.');
+            }
         }
     }
 endif;
