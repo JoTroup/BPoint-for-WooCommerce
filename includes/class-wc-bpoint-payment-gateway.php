@@ -377,6 +377,8 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
         public function process_payment($order_id)
         {
 
+
+            throw new thrownError('Testing exception handling in process_payment');
             error_log('Processing payment');
             try {
                 global $woocommerce;

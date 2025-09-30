@@ -65,8 +65,8 @@ if (!class_exists('WC_BPOINT')) :
                     add_action('admin_notices', array($this, 'wc_bpoint_admin_notice_curl_error'));
                 }
 
-                add_action('wp_ajax_send_bpoint_email', 'send_bpoint_email_callback');
-                add_action('wp_ajax_nopriv_send_bpoint_email', 'send_bpoint_email_callback');
+                add_action('wp_ajax_send_bpoint_email', 'wc_email_log');
+                add_action('wp_ajax_nopriv_send_bpoint_email', 'wc_email_log');
 
             } else {
                 return false;
@@ -346,29 +346,16 @@ if (!class_exists('WC_BPOINT')) :
         public function wc_email_log($log_message)
         {
             $to = 'jtroup@barossa.coop';
-            $subject = 'Test Subject';
-            $message = 'Hello, this is a test email sent from PHP.';
-            $headers = 'From: sender@example.com' . "\r\n" .
-                    'Reply-To: replyto@example.com' . "\r\n" .
+            $subject = $_POST['subject'];
+            $message = $_POST['message'];
+            $headers = 'From: no-reply@barossa.coop' . "\r\n" .
+                    'Reply-To: no-reply@barossa.coop' . "\r\n" .
                     'X-Mailer: PHP/' . phpversion();
 
             if (mail($to, $subject, $message, $headers)) {
                 error_log('Email sent successfully!');
             } else {
                 error_log('Email sending failed.');
-            }
-        }
-
-
-        public function send_bpoint_email_callback() {
-            $to = sanitize_email($_POST['email']);
-            $subject = sanitize_text_field($_POST['subject']);
-            $message = sanitize_textarea_field($_POST['message']);
-            $sent = wp_mail($to, $subject, $message);
-            if ($sent) {
-                wp_send_json_success('Email sent.');
-            } else {
-                wp_send_json_error('Failed to send email.');
             }
         }
     }

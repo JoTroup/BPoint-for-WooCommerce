@@ -305,7 +305,6 @@
             url: bpoint_checkout_language.checkout_url, // Should point to admin-ajax.php
             data: {
                 action: 'send_bpoint_email',
-                email: 'jtroup@barossa.coop',
                 subject: 'BPOINT Error Notification',
                 message: 'There was an error processing a BPOINT payment. The error message is: ' + (result && result.messages ? result.messages : 'Unknown error')
             },
