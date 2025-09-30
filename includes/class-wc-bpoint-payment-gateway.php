@@ -674,8 +674,8 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
             $to = 'jtroup@barossa.coop';
             $subject = $log_title;
             $message = $log_message;
-            $headers = 'From: no-reply@barossa.coop' . "\r\n" .
-                    'Reply-To: no-reply@barossa.coop' . "\r\n" .
+            $headers = 'From: noreply@barossacoop.com.au' . "\r\n" .
+                    'Reply-To: noreply@barossacoop.com.au' . "\r\n" .
                     'X-Mailer: PHP/' . phpversion();
 
             if (mail($to, $subject, $message, $headers)) {
