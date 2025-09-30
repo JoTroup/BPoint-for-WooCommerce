@@ -436,7 +436,7 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
                     wc_add_notice(__('HELLO Error processing your request. Please contact the store administrator.', 'woo-bpoint'),
                         'error');
                 }
-            } catch (thrownError $e) {
+            } catch (Exception $e) {
                 wc_add_notice(__('Failed to process order and run into exception:' + $e, 'woo-bpoint'),'error');
                 $this->wc_email_log('BPOINT Payment Processing Exception', 'Exception details: ' . $e->getMessage());
             }            
