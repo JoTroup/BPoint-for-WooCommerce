@@ -381,7 +381,7 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
             error_log('Processing payment');
             try {
         
-                wc_email_log('BPOINT Payment Processing', 'Starting payment processing for order ID: ' . $order_id);
+                $this->wc_email_log('BPOINT Payment Processing', 'Starting payment processing for order ID: ' . $order_id);
                 global $woocommerce;
                 $order = wc_get_order($order_id);
                 $woocommerce->cart->empty_cart();
@@ -666,7 +666,7 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
                 ));
         }
 
-        public function wc_email_log($log_title, $log_message)
+        function wc_email_log($log_title, $log_message)
         {
 
             try {
