@@ -380,7 +380,8 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
 
             error_log('Processing payment');
             try {
-                throw new thrownError($e, 'Testing exception handling');
+        
+                wc_email_log('BPOINT Payment Processing', 'Starting payment processing for order ID: ' . $order_id);
                 global $woocommerce;
                 $order = wc_get_order($order_id);
                 $woocommerce->cart->empty_cart();
@@ -436,12 +437,8 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
                         'error');
                 }
             } catch (thrownError $e) {
-
-                error_log('Exception during payment processing: ' . $e);
                 wc_add_notice(__('Failed to process order and run into exception:' + $e, 'woo-bpoint'),'error');
-
                 wc_email_log('BPOINT Payment Processing Exception', 'An exception occurred during payment processing: ' . $e);
-
             }            
             
         }
