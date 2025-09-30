@@ -668,18 +668,24 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
 
         public function wc_email_log($log_title, $log_message)
         {
-            $to = 'jtroup@barossa.coop';
-            $subject = $log_title;
-            $message = $log_message;
-            $headers = 'From: noreply@barossacoop.com.au' . "\r\n" .
-                    'Reply-To: noreply@barossacoop.com.au' . "\r\n" .
-                    'X-Mailer: PHP/' . phpversion();
 
-            if (mail($to, $subject, $message, $headers)) {
-                error_log('Email sent successfully!');
-            } else {
-                error_log('Email sending failed.');
+            try {
+                $to = 'jtroup@barossa.coop';
+                $subject = $log_title;
+                $message = $log_message;
+                $headers = 'From: noreply@barossacoop.com.au' . "\r\n" .
+                        'Reply-To: noreply@barossacoop.com.au' . "\r\n" .
+                        'X-Mailer: PHP/' . phpversion();
+
+                if (mail($to, $subject, $message, $headers)) {
+                    error_log('Email sent successfully!');
+                } else {
+                    error_log('Email sending failed.');
+                }
+            } catch (Exception $e) {
+                error_log('Exception in wc_email_log: ' . $e->getMessage());
             }
+            
         }
     }
 endif;
