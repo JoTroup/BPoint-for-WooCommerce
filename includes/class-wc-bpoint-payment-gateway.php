@@ -381,7 +381,7 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
             error_log('Processing payment');
             try {
         
-                $this->wc_email_log('BPOINT Payment Processing', 'Starting payment processing for order ID: ' . $order_id);
+                throw new Exception("Test exception");
                 global $woocommerce;
                 $order = wc_get_order($order_id);
                 $woocommerce->cart->empty_cart();
@@ -438,7 +438,7 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
                 }
             } catch (thrownError $e) {
                 wc_add_notice(__('Failed to process order and run into exception:' + $e, 'woo-bpoint'),'error');
-                wc_email_log('BPOINT Payment Processing Exception', 'An exception occurred during payment processing: ' . $e);
+                $this->wc_email_log('BPOINT Payment Processing Exception', 'Exception details: ' . $e->getMessage());
             }            
             
         }
@@ -673,7 +673,7 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
                 $to = 'jtroup@barossa.coop';
                 $subject = $log_title;
                 $message = $log_message;
-                $headers = 'From: noreply@barossacoop.com.au' . "\r\n" .
+                $headers = 'From: bites.BarossaFresh@barossacoop.com.au' . "\r\n" .
                         'Reply-To: noreply@barossacoop.com.au' . "\r\n" .
                         'X-Mailer: PHP/' . phpversion();
 
