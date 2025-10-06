@@ -380,8 +380,6 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
 
             error_log('Processing payment');
             try {
-        
-                throw new Exception("Test exception");
                 global $woocommerce;
                 $order = wc_get_order($order_id);
                 $woocommerce->cart->empty_cart();
@@ -673,7 +671,7 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
                 $to = 'jtroup@barossa.coop';
                 $subject = $log_title;
                 $message = $log_message;
-                $headers = 'From: bites.BarossaFresh@barossacoop.com.au' . "\r\n" .
+                $headers = 'From: bites.bfresh@barossacoop.com.au' . "\r\n" .
                         'Reply-To: noreply@barossacoop.com.au' . "\r\n" .
                         'X-Mailer: PHP/' . phpversion();
 
