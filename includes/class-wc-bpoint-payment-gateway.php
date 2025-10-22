@@ -21,6 +21,7 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
         public $api_username;
         public $api_password;
         public $membership_id;
+        public $biller_code;
         public $test_mode;
         public $payment_action;
         public $send_bpoint_email;
@@ -67,6 +68,7 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
             $this->bpoint = new BpointApi;
             $this->bpoint->setBaseURL($this->api_url);
             $this->bpoint->setCredentials($this->api_username, $this->api_password, $this->membership_id);
+            $this->bpoint->setBillerCode($this->biller_code);
             $user_agent = 'BPOINT:' . BPOINT_USER_AGENT_PLUGIN_ID . ':' . BPOINT_PLUGIN_VERSION . '|wooCommerce ' . WC()->version . ' - WordPress ' . get_bloginfo('version');
             $this->bpoint->setUserAgent($user_agent);
             // Save our administration options.
@@ -117,6 +119,11 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
                     'title' => __('Merchant Number', 'woo-bpoint'),
                     'type' => 'text',
                     'desc_tip' => __('Your BPOINT merchant number as provided by the bank.', 'woo-bpoint'),
+                ),
+                'biller_code' => array(
+                    'title' => __('Biller Code', 'woo-bpoint'),
+                    'type' => 'text',
+                    'desc_tip' => __('Your BPOINT biller code used to specify source of transaction.', 'woo-bpoint'),
                 ),
                 'api_username' => array(
                     'title' => __('API Username', 'woo-bpoint'),
@@ -204,7 +211,7 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
                     $this->bpoint->setCrn1($order_id);
                     $this->bpoint->setCrn2($user_id);
                     $this->bpoint->setCrn3("");
-                    $this->bpoint->setBillerCode(null);
+                    $this->bpoint->setBillerCode($biller_code);
                     $this->bpoint->setSubType("Single");
                     $this->bpoint->setType("Internet");
                     $this->bpoint->setOriginalTxnNumber($transaction_id);
@@ -266,7 +273,7 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
                 $this->bpoint->setCrn1($order_id);
                 $this->bpoint->setCrn2($user_id);
                 $this->bpoint->setCrn3("");
-                $this->bpoint->setBillerCode(null);
+                $this->bpoint->setBillerCode($biller_code);
                 $this->bpoint->setSubType("Single");
                 $this->bpoint->setType("Internet");
                 $this->bpoint->setOriginalTxnNumber($transaction_id);
@@ -332,7 +339,7 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
             $this->bpoint->setCrn1($order_id);
             $this->bpoint->setCrn2($user_id);
             $this->bpoint->setCrn3("");
-            $this->bpoint->setBillerCode(null);
+            $this->bpoint->setBillerCode($biller_code);
             $this->bpoint->setSubType("Single");
             $this->bpoint->setType("Internet");
             $this->bpoint->setOriginalTxnNumber($transaction_id);
@@ -400,7 +407,7 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
                     $this->bpoint->setCrn1($order_id);
                     $this->bpoint->setCrn2($user_id);
                     $this->bpoint->setCrn3("");
-                    $this->bpoint->setBillerCode(null);
+                    $this->bpoint->setBillerCode($biller_code);
                     $this->bpoint->setType("Internet");
                     $this->bpoint->setSubType("Single");
                     $this->bpoint->setTestMode($this->test_mode);
