@@ -386,6 +386,9 @@ if (!class_exists('WC_BPOINT_Payment_Gateway') && class_exists('WC_Payment_Gatew
 
 
             error_log('Processing payment');
+            error_log('Order ID: ' . $order_id);
+            $biller_code = $this->biller_code;
+            error_log('Biller Code: ' . $biller_code);
             try {
                 global $woocommerce;
                 $order = wc_get_order($order_id);
