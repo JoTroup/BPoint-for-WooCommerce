@@ -1,4 +1,4 @@
 <?php
 
-define('BPOINT_PLUGIN_VERSION', '1.2.2');
+define('BPOINT_PLUGIN_VERSION', '1.2.3');
 define('BPOINT_USER_AGENT_PLUGIN_ID', '1029');

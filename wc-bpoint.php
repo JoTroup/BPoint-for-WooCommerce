@@ -3,7 +3,7 @@
  * Plugin Name: BPOINT (WooCommerce Payment Gateway)
  * Plugin URI: https://www.bpoint.com.au/
  * Description: The Commonwealth Bank’s BPOINT solution allows businesses to easily and securely accept payments online.
- * Version: 1.2.2
+ * Version: 1.2.3
  * Author: Josiah Troup
  * Author URI: https://www.bpoint.com.au/
  * Text Domain: woo-bpoint
